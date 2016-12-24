@@ -1,0 +1,104 @@
+@mixin user-select {
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	-o-user-select: none;
+	user-select: none;
+}
+
+/* 阴影 box-shadow */
+@mixin box-shadow($shadow...) {
+	-webkit-box-shadow: $shadow;
+	-moz-box-shadow: $shadow;
+	-o-box-shadow: $shadow;
+	-ms-box-shadow: $shadow;
+	box-shadow: $shadow;
+}
+
+/* box-sizing */
+@mixin box-sizing($item) {
+	-webkit-box-sizing: $item;
+	-moz-box-sizing: $item;
+	box-sizing: $item;
+}
+
+@mixin transition($item...) {
+	-webkit-transition: $item;
+	-o-transition: $item;
+	transition: $item;
+}
+
+@mixin transform($item...) {
+	-webkit-transform: $item;
+	-ms-transform: $item;
+	-o-transform: $item;
+	transform: $item;
+}
+
+@mixin transition-delay($item) {
+ 	-webkit-transition-delay: $item;
+	-o-transition-delay: $item;
+	transition-delay: $item;
+ }
+
+@mixin transform-origin($item...) {
+	-webkit-transform-origin: $item;
+	-moz-transform-origin: $item;
+	-ms-transform-origin: $item;
+	-o-transform-origin: $item;
+	transform-origin: $item;
+}
+
+@mixin border-radius($type, $size) {
+	@if $type == all {
+		-webkit-border-radius: $size;
+		-moz-border-radius: $size;
+		-ms-border-radius: $size;
+		-o-border-radius: $size;
+		border-radius: $size;
+	} @else if $type == topleft {
+		-webkit-border-top-left-radius: $size;
+		-moz-border-top-left-radius: $size;
+		-ms-border-top-left-radius: $size;
+		-o-border-top-left-radius: $size;
+		border-top-left-radius: $size;
+	} @else if $type ==  topright {
+		-webkit-border-top-right-radius: $size;
+		-moz-border-top-right-radius: $size;
+		-ms-border-top-right-radius: $size;
+		-o-border-top-right-radius: $size;
+		border-top-right-radius: $size;
+	} @else if $type == bottomleft {
+		-webkit-border-bottom-left-radius: $size;
+		-moz-border-bottom-left-radius: $size;
+		-ms-border-bottom-left-radius: $size;
+		-o-border-bottom-left-radius: $size;
+		border-bottom-left-radius: $size;
+	} @else if $type == bottomright {
+		-webkit-border-bottom-right-radius: $size;
+		-moz-border-bottom-right-radius: $size;
+		-ms-border-bottom-right-radius: $size;
+		-o-border-bottom-right-radius: $size;
+		border-bottom-right-radius: $size;
+	}
+}			
+
+/* 计算出来的字体大小  $item = 16rem */
+@function fsize($item) {
+	@return $item/54;
+}
+
+/* 计算宽高 */
+@function len($num) {
+	@return $num/54;
+}
+
+@mixin line-height($item) {
+	height: $item;
+	line-height: $item;
+}
+/* 宽高相等 */
+@mixin w-eq-h($item) {
+	width: $item;
+	height: $item;
+}
