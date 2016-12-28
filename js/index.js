@@ -1,12 +1,11 @@
 function userInit() {
     var html = "";
     $.ajax({
-    	url: '../json/main.json',
+    	url: './json/main.json',
     	type: 'get',
     	dataType: 'json',
     })
     .done(function(data) {
-    	console.log(data);
     	var tempObj = data["data"]["userlist"];
     	var userLength = tempObj.length;
     	for(var i = 0; i < userLength; i++){
@@ -27,4 +26,16 @@ function userInit() {
     });
 }
 
+// 数据进行初始化
 userInit();
+
+// 账号查询
+$("#accountSearch").click(function(event) {
+	var _self = $(this);
+	_self.addClass('selected').siblings().removeClass('selected');
+	$(".sort_box").addClass('hide');
+	$(".search-boxing").removeClass('hide');
+});
+$(".search-btn").click(function(event) {
+	$(".search-list").removeClass('hide');
+});

@@ -42,7 +42,7 @@ $(function(){
 }*/
 
 function initials() {//公众号排序
-    var SortList=$(".sort_list");
+    var SortList=$(".sort_box .sort_list");
     var SortBox=$(".sort_box");
     SortList.sort(asc_sort).appendTo('.sort_box');//按首字母排序
     function asc_sort(a, b) {
