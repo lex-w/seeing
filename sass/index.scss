@@ -123,7 +123,7 @@ header.fixed {
 
 /* search style */
 
-.search-boxing {
+.search-boxing, .category-box {
     width: 100%;
     padding-top: 45px;
     overflow: hidden;
@@ -168,5 +168,47 @@ header.fixed {
         height: 20px;
         background: url(../img/ic_search_deep.png) no-repeat center;
         background-size: 20px;
+    }
+}
+
+
+/* 分类搜索 */
+.category-box{
+    position: relative;
+    margin-bottom: 45px;
+    &:before {
+        display: block;
+        position: fixed;
+        content: " ";
+        border-left: 9px solid transparent;
+        border-right: 9px solid transparent;
+        top: 37px;
+        left: calc(71% - 5px);
+        border-top: 0;
+        border-bottom: 10px solid #edf3ef;
+        z-index: 100;
+    }
+}
+.category-type{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    display: -webkit-flex;
+    width: 100%;
+    line-height: 45px;
+    background-color: #e5f3e8;
+    border-top: 1px solid #d1e0d4;
+    a{
+        color: #36845b;
+        border-right: 1px solid #d1e0d4;
+        text-align: center;
+        flex: 1;
+        &:last-of-type{
+            border-right: 0;
+        }
+        &.selected{
+            background-color: #27b769;
+            color: #fff;
+        }
     }
 }
