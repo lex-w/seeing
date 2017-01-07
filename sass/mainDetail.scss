@@ -553,9 +553,9 @@ a:hover {
 }
 
 .header {
-    background: #DA5751;
+    background: #27b769;
     height: 44px;
-    border-bottom: 1px solid #f07575;
+    border-bottom: 1px solid #38c579;
     width: 94%;
     padding: 0 3%;
     display: flex;
@@ -579,12 +579,13 @@ a:hover {
     flex-basis: 20%;
 }
 
-.header .child.return i {
+
+/* .header .child.return i {
     width: .12rem;
     height: .2rem;
     background: url(../images/BACK.png) no-repeat;
     background-size: cover;
-}
+} */
 
 .header .child.date {
     display: flex;
@@ -798,7 +799,7 @@ tr .not_this {
 }
 
 .today i {
-    background: #ec5252 !important;
+    background: #27b769 !important;
     color: #fff;
     border-radius: 50%;
 }
@@ -808,15 +809,16 @@ tr .not_this {
     border-radius: 50%;
 }
 
-tr td:first-child {
+
+/* tr td:first-child {
     color: #f00;
 }
 
 tr td:last-child {
     color: #f00;
-}
+} */
 
-td {
+/* td {
     position: relative;
 }
 
@@ -840,7 +842,7 @@ td .shangban {
     position: absolute;
     right: 0;
     top: 0;
-}
+} */
 
 
 /*******弹窗******/
@@ -1127,7 +1129,7 @@ td .shangban {
     box-sizing: border-box;
     padding: 0 0.15rem;
     font-size: 0.19rem;
-    color: #ec5252;
+    color: #27b769;
     line-height: 0.5rem;
     font-weight: normal;
 }
@@ -1212,7 +1214,7 @@ td .shangban {
 }
 
 .nbxs .swiper-slide-active {
-    color: #ec5252;
+    color: #27b769;
 }
 
 .tc-bot {
@@ -1234,7 +1236,7 @@ td .shangban {
 }
 
 .tc-bot-right {
-    color: #ec5252;
+    color: #27b769;
 }
 
 .tc-bot i {
@@ -1251,7 +1253,8 @@ td .shangban {
 
 /*loading*/
 
-.loading {
+
+/* .loading {
     width: 1.53rem;
     height: 1.15rem;
     position: fixed;
@@ -1298,17 +1301,19 @@ td .shangban {
     100% {
         transform: rotate(360deg)
     }
-}
+} */
 
-.reduction-bj {
+
+/* .reduction-bj {
     background: url(../images/reduction.png);
     width: 0.36rem;
     height: 0.36rem;
     background-size: 0.36rem;
     margin: 0.3rem auto 0;
-}
+} */
 
-.jg {
+
+/* .jg {
     background: url(../images/jg.png);
     background-size: 0.36rem;
 }
@@ -1316,4 +1321,50 @@ td .shangban {
 .back2 {
     background: url(../images/back.png) center no-repeat;
     background-size: 0.12rem 0.2rem;
+} */
+
+body {
+    background: #fff !important;
+}
+
+.colorTip {
+    height: 48px;
+    background: #f7f8f7;
+    .color-left {
+        line-height: 48px;
+        width: 75%;
+        display: flex;
+        display: -webkit-flex;
+        & > span {
+            text-align: center;
+            flex: 1;
+            i {
+                margin-right: 5px;
+                display: inline-block;
+                width: 15px;
+                height: 15px;
+                background: #6d80f7;
+                border-radius: 50%;
+                vertical-align: text-top;
+            }
+        }
+        .danger-time i {
+            background: #ffcacb;
+        }
+        .bast-time i {
+            background: #93efa2;
+        }
+    }
+}
+
+.basicInfo {
+    .basic-group{
+        padding: 0 .2rem;
+        @extend .f36;
+        line-height: 42px;
+        border-bottom: 1px solid #f7f8f7;
+        & > span{
+            float: right;
+        }
+    }
 }
