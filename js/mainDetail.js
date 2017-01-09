@@ -11,11 +11,11 @@ var mySwiper = new Swiper('.swiper-container', {
     onSlideChangeStart: function(swiper) {
         //swiper.params.allowSwipeToPrev = false;
         swiper.lockSwipes();
-
+        console.log("onSlideChangeStart");
     },
 
     onSlideChangeEnd: function(swiper) {
-
+        console.log("onSlideChangeEnd");
         var nows = $(".swiper-slide-active").find("table").attr("id");
         if (nows == 'now2')
             return;
@@ -215,13 +215,13 @@ var mySwiper = new Swiper('.swiper-container', {
             $("#ymym").html(sev_y + "年" + sev_m + "月");
             active = nows;
         }
-        var trLength = $("#d" + nows).find("tr").length;
-        if (trLength == 6) {
-            $(".swiper-container").css("paddingBottom", ".45rem");
-        } else {
-            $(".swiper-container").css("paddingBottom", "");
+        //var trLength = $("#d" + nows).find("tr").length;
+        // if (trLength == 6) {
+        //     $(".swiper-container").css("paddingBottom", ".45rem");
+        // } else {
+        //     $(".swiper-container").css("paddingBottom", "");
 
-        }
+        // }
         swiper.unlockSwipes();
     }
 
@@ -500,10 +500,10 @@ function set_top(a) {
         //document.getElementById("top_week").innerHTML = weekk;
         //document.getElementById("top_yue").innerHTML = yue;
     } else {
-        var weeks = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
-        var y = a.attr("data_y");
-        var m = parseInt(a.attr("data_m")) - 1;
-        if (m < 0) m = 11;
+        //var weeks = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
+        //var y = a.attr("data_y");
+        //var m = parseInt(a.attr("data_m")) - 1;
+        //if (m < 0) m = 11;
         //var d = parseInt(a.attr("data_d"));
         //var weekk = weeks[new Date(y, m, d).getDay()];
         //var ms = parseInt(a.attr("data_m"));
@@ -517,7 +517,7 @@ function set_top(a) {
     }
 }
 
-var LunarDate = {
+/*var LunarDate = {
     madd: new Array(0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334),
     HsString: '甲乙丙丁戊己庚辛壬癸',
     EbString: '子丑寅卯辰巳午未申酉戌亥',
@@ -607,7 +607,7 @@ var LunarDate = {
             return this.GetcDateString(1);
         }
     }
-};
+};*/
 
 /*function getjq(yyyy, mm, dd) {
     if (yyyy == 2016 && mm == 12 && dd == 7) {
@@ -651,12 +651,9 @@ $(function() {
 });
 
 $('.date').on('click', function() {
-
     $('.tc').show();
     $('.tc-innner').show();
-
     tc();
-
 });
 
 var e = 1;
