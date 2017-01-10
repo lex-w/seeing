@@ -1,231 +1,243 @@
 //全局的年月日，适用于任何时候获取今天的年月日。（很重要）
 var sev_m, sev_y, sev_d, active = 3;
 var mySwiper = new Swiper('.swiper-container', {
-    initialSlide: 1,
-    loop: true,
-    speed: 400,
+        initialSlide: 1,
+        loop: true,
+        speed: 400,
 
-    followFinger: false,
-    prevButton: '.js_prev',
-    nextButton: '.js_next',
-    onSlideChangeStart: function(swiper) {
-        //swiper.params.allowSwipeToPrev = false;
-        swiper.lockSwipes();
-        console.log("onSlideChangeStart");
-    },
+        followFinger: false,
+        prevButton: '.js_prev',
+        nextButton: '.js_next',
+        onSlideChangeStart: function(swiper) {
+            //swiper.params.allowSwipeToPrev = false;
+            swiper.lockSwipes();
+            console.log(swiper.activeIndex);
+            console.log($(".swiper-slide-active").height())
+            //fixPagesHeight($(".swiper-slide-active").height());
+        },
+        onSlideChangeEnd: function(swiper) {
+            console.log("onSlideChangeEnd");
+            var nows = $(".swiper-slide-active").find("table").attr("id");
+            if (nows == 'now2')
+                return;
+            nows = parseInt(nows.substr(1, 1));
+            //console.log(active,nows);
+            if (nows == active)
+                return;
+            if (active == 4 && nows == 5) {
+                var fors = 1;
 
-    onSlideChangeEnd: function(swiper) {
-        console.log("onSlideChangeEnd");
-        var nows = $(".swiper-slide-active").find("table").attr("id");
-        if (nows == 'now2')
-            return;
-        nows = parseInt(nows.substr(1, 1));
-        //console.log(active,nows);
-        if (nows == active)
-            return;
-        if (active == 4 && nows == 5) {
-            var fors = 1;
+                sev_m++;
+                if (sev_m > 12) {
+                    sev_m = 1;
+                    sev_y++;
+                }
+                var nowweak = new Date(sev_y, sev_m - 1, 1).getDay();
+                get_first(nowweak, sev_y, sev_m, 0, "d2");
 
-            sev_m++;
-            if (sev_m > 12) {
-                sev_m = 1;
-                sev_y++;
+                var lastm = sev_m - 1;
+                var lasty = sev_y;
+                if (lastm < 1) {
+                    lastm = 12;
+                    lasty--;
+                }
+
+                var nm = sev_m + 1;
+                var ny = sev_y;
+                if (nm > 12) {
+                    nm = 1;
+                    ny++;
+                }
+                var nowweak = new Date(ny, nm - 1, 1).getDay();
+                var lastweek = new Date(lasty, lastm - 1, 1).getDay();
+                get_first(lastweek, lasty, lastm, 0, "d" + fors);
+                get_first(nowweak, ny, nm, 0, "d3");
+                $("#ymym").html(sev_y + "年" + sev_m + "月");
+                active = 5;
+            } else if (active == 2 && nows == 1) {
+                var fors = 5;
+
+                var nextweak = new Date(sev_y, sev_m - 1, 1).getDay();
+                get_first(nextweak, sev_y, sev_m, 0, "d" + fors);
+                sev_m--;
+                if (sev_m < 1) {
+                    sev_m = 12;
+                    sev_y--;
+                }
+                var nowweak = new Date(sev_y, sev_m - 1, 1).getDay();
+                get_first(nowweak, sev_y, sev_m, 0, "d4");
+
+                var nm = sev_m - 1;
+                var ny = sev_y;
+                if (nm < 1) {
+                    nm = 12;
+                    ny--;
+                }
+                var nowweak = new Date(ny, nm - 1, 1).getDay();
+                //get_first(nowweak, ny, nm, 0, "d4");
+                get_first(nowweak, ny, nm, 0, "d3");
+                $("#ymym").html(sev_y + "年" + sev_m + "月");
+                active = 1;
+            } else if (active == 5 && nows == 3) {
+                var fors = 4;
+
+                var lastm = sev_m;
+                var lasty = sev_y;
+
+                sev_m++;
+                if (sev_m > 12) {
+                    sev_m = 1;
+                    sev_y++;
+                }
+
+                var nm = sev_m + 1;
+                var ny = sev_y;
+                if (nm > 12) {
+                    nm = 1;
+                    ny++;
+                }
+                var nowweak = new Date(ny, nm - 1, 1).getDay();
+                get_first(nowweak, ny, nm, 0, "d" + fors);
+                var nowweak = new Date(lasty, lastm - 1, 1).getDay();
+                get_first(nowweak, lasty, lastm, 0, "d2");
+                $("#ymym").html(sev_y + "年" + sev_m + "月");
+                active = 3;
+            } else if (active == 1 && nows == 3) {
+                var fors = 2;
+
+                var lastm = sev_m;
+                var lasty = sev_y;
+
+                sev_m--;
+                if (sev_m < 1) {
+                    sev_m = 12;
+                    sev_y--;
+                }
+
+                var nm = sev_m - 1;
+                var ny = sev_y;
+                if (nm < 1) {
+                    nm = 12;
+                    ny--;
+                }
+                var nowweak = new Date(ny, nm - 1, 1).getDay();
+                get_first(nowweak, ny, nm, 0, "d" + fors);
+                var nowweak = new Date(lasty, lastm - 1, 1).getDay();
+                get_first(nowweak, lasty, lastm, 0, "d4");
+                $("#ymym").html(sev_y + "年" + sev_m + "月");
+                active = 3;
+            } else if (active == 1 && nows == 5) {
+                var fors = 3;
+
+                var lastm = sev_m;
+                var lasty = sev_y;
+
+                sev_m++;
+                if (sev_m > 12) {
+                    sev_m = 1;
+                    sev_y++;
+                }
+
+                var nm = sev_m + 1;
+                var ny = sev_y;
+                if (nm > 12) {
+                    nm = 1;
+                    ny++;
+                }
+                var nowweak = new Date(ny, nm - 1, 1).getDay();
+                get_first(nowweak, ny, nm, 0, "d" + fors);
+                $("#ymym").html(sev_y + "年" + sev_m + "月");
+                active = 5;
+            } else if (active == 5 && nows == 1) {
+                var fors = 3;
+
+
+                sev_m--;
+                if (sev_m < 1) {
+                    sev_m = 12;
+                    sev_y--;
+                }
+                var lastm = sev_m;
+                var lasty = sev_y;
+
+                var nm = sev_m - 1;
+                var ny = sev_y;
+                if (nm < 1) {
+                    nm = 12;
+                    ny--;
+                }
+                var nowweak = new Date(ny, nm - 1, 1).getDay();
+                var lastweak = new Date(lasty, sev_m - 1, 1).getDay();
+                get_first(nowweak, ny, nm, 0, "d" + fors);
+                console.log(lasty, lastm)
+                get_first(lastweak, lasty, sev_m, 0, "d4");
+                $("#ymym").html(sev_y + "年" + sev_m + "月");
+                active = 1;
+            } else if (active > nows) {
+                var fors = nows - 1;
+                if (fors < 1)
+                    fors = 5;
+
+                sev_m--;
+                if (sev_m < 1) {
+                    sev_m = 12;
+                    sev_y--;
+                }
+
+                var nm = sev_m - 1;
+                var ny = sev_y;
+                if (nm < 1) {
+                    nm = 12;
+                    ny--;
+                }
+                var nowweak = new Date(ny, nm - 1, 1).getDay();
+                get_first(nowweak, ny, nm, 0, "d" + fors);
+                $("#ymym").html(sev_y + "年" + sev_m + "月");
+                active = nows;
+            } else if (active < nows) {
+                var fors = nows + 1;
+                if (fors > 5)
+                    fors = 1;
+
+                sev_m++;
+                if (sev_m > 12) {
+                    sev_m = 1;
+                    sev_y++;
+                }
+
+                var nm = sev_m + 1;
+                var ny = sev_y;
+                if (nm > 12) {
+                    nm = 1;
+                    ny++;
+                }
+                var nowweak = new Date(ny, nm - 1, 1).getDay();
+                get_first(nowweak, ny, nm, 0, "d" + fors);
+                $("#ymym").html(sev_y + "年" + sev_m + "月");
+                active = nows;
             }
-            var nowweak = new Date(sev_y, sev_m - 1, 1).getDay();
-            get_first(nowweak, sev_y, sev_m, 0, "d2");
+            //var trLength = $("#d" + nows).find("tr").length;
+            // if (trLength == 6) {
+            //     $(".swiper-container").css("paddingBottom", ".45rem");
+            // } else {
+            //     $(".swiper-container").css("paddingBottom", "");
 
-            var lastm = sev_m - 1;
-            var lasty = sev_y;
-            if (lastm < 1) {
-                lastm = 12;
-                lasty--;
-            }
-
-            var nm = sev_m + 1;
-            var ny = sev_y;
-            if (nm > 12) {
-                nm = 1;
-                ny++;
-            }
-            var nowweak = new Date(ny, nm - 1, 1).getDay();
-            var lastweek = new Date(lasty, lastm - 1, 1).getDay();
-            get_first(lastweek, lasty, lastm, 0, "d" + fors);
-            get_first(nowweak, ny, nm, 0, "d3");
-            $("#ymym").html(sev_y + "年" + sev_m + "月");
-            active = 5;
-        } else if (active == 2 && nows == 1) {
-            var fors = 5;
-
-            var nextweak = new Date(sev_y, sev_m - 1, 1).getDay();
-            get_first(nextweak, sev_y, sev_m, 0, "d" + fors);
-            sev_m--;
-            if (sev_m < 1) {
-                sev_m = 12;
-                sev_y--;
-            }
-            var nowweak = new Date(sev_y, sev_m - 1, 1).getDay();
-            get_first(nowweak, sev_y, sev_m, 0, "d4");
-
-            var nm = sev_m - 1;
-            var ny = sev_y;
-            if (nm < 1) {
-                nm = 12;
-                ny--;
-            }
-            var nowweak = new Date(ny, nm - 1, 1).getDay();
-            //get_first(nowweak, ny, nm, 0, "d4");
-            get_first(nowweak, ny, nm, 0, "d3");
-            $("#ymym").html(sev_y + "年" + sev_m + "月");
-            active = 1;
-        } else if (active == 5 && nows == 3) {
-            var fors = 4;
-
-            var lastm = sev_m;
-            var lasty = sev_y;
-
-            sev_m++;
-            if (sev_m > 12) {
-                sev_m = 1;
-                sev_y++;
-            }
-
-            var nm = sev_m + 1;
-            var ny = sev_y;
-            if (nm > 12) {
-                nm = 1;
-                ny++;
-            }
-            var nowweak = new Date(ny, nm - 1, 1).getDay();
-            get_first(nowweak, ny, nm, 0, "d" + fors);
-            var nowweak = new Date(lasty, lastm - 1, 1).getDay();
-            get_first(nowweak, lasty, lastm, 0, "d2");
-            $("#ymym").html(sev_y + "年" + sev_m + "月");
-            active = 3;
-        } else if (active == 1 && nows == 3) {
-            var fors = 2;
-
-            var lastm = sev_m;
-            var lasty = sev_y;
-
-            sev_m--;
-            if (sev_m < 1) {
-                sev_m = 12;
-                sev_y--;
-            }
-
-            var nm = sev_m - 1;
-            var ny = sev_y;
-            if (nm < 1) {
-                nm = 12;
-                ny--;
-            }
-            var nowweak = new Date(ny, nm - 1, 1).getDay();
-            get_first(nowweak, ny, nm, 0, "d" + fors);
-            var nowweak = new Date(lasty, lastm - 1, 1).getDay();
-            get_first(nowweak, lasty, lastm, 0, "d4");
-            $("#ymym").html(sev_y + "年" + sev_m + "月");
-            active = 3;
-        } else if (active == 1 && nows == 5) {
-            var fors = 3;
-
-            var lastm = sev_m;
-            var lasty = sev_y;
-
-            sev_m++;
-            if (sev_m > 12) {
-                sev_m = 1;
-                sev_y++;
-            }
-
-            var nm = sev_m + 1;
-            var ny = sev_y;
-            if (nm > 12) {
-                nm = 1;
-                ny++;
-            }
-            var nowweak = new Date(ny, nm - 1, 1).getDay();
-            get_first(nowweak, ny, nm, 0, "d" + fors);
-            $("#ymym").html(sev_y + "年" + sev_m + "月");
-            active = 5;
-        } else if (active == 5 && nows == 1) {
-            var fors = 3;
-
-
-            sev_m--;
-            if (sev_m < 1) {
-                sev_m = 12;
-                sev_y--;
-            }
-            var lastm = sev_m;
-            var lasty = sev_y;
-
-            var nm = sev_m - 1;
-            var ny = sev_y;
-            if (nm < 1) {
-                nm = 12;
-                ny--;
-            }
-            var nowweak = new Date(ny, nm - 1, 1).getDay();
-            var lastweak = new Date(lasty, sev_m - 1, 1).getDay();
-            get_first(nowweak, ny, nm, 0, "d" + fors);
-            console.log(lasty, lastm)
-            get_first(lastweak, lasty, sev_m, 0, "d4");
-            $("#ymym").html(sev_y + "年" + sev_m + "月");
-            active = 1;
-        } else if (active > nows) {
-            var fors = nows - 1;
-            if (fors < 1)
-                fors = 5;
-
-            sev_m--;
-            if (sev_m < 1) {
-                sev_m = 12;
-                sev_y--;
-            }
-
-            var nm = sev_m - 1;
-            var ny = sev_y;
-            if (nm < 1) {
-                nm = 12;
-                ny--;
-            }
-            var nowweak = new Date(ny, nm - 1, 1).getDay();
-            get_first(nowweak, ny, nm, 0, "d" + fors);
-            $("#ymym").html(sev_y + "年" + sev_m + "月");
-            active = nows;
-        } else if (active < nows) {
-            var fors = nows + 1;
-            if (fors > 5)
-                fors = 1;
-
-            sev_m++;
-            if (sev_m > 12) {
-                sev_m = 1;
-                sev_y++;
-            }
-
-            var nm = sev_m + 1;
-            var ny = sev_y;
-            if (nm > 12) {
-                nm = 1;
-                ny++;
-            }
-            var nowweak = new Date(ny, nm - 1, 1).getDay();
-            get_first(nowweak, ny, nm, 0, "d" + fors);
-            $("#ymym").html(sev_y + "年" + sev_m + "月");
-            active = nows;
+            // }
+             console.log($(".swiper-slide-active table").height())
+            fixPagesHeight($(".swiper-slide-active table").height());
+            swiper.unlockSwipes();
         }
-        //var trLength = $("#d" + nows).find("tr").length;
-        // if (trLength == 6) {
-        //     $(".swiper-container").css("paddingBottom", ".45rem");
-        // } else {
-        //     $(".swiper-container").css("paddingBottom", "");
-
-        // }
-        swiper.unlockSwipes();
-    }
-
+    })
+//Function to Fix Pages Height
+function fixPagesHeight(height) {
+    $('.swiper-pages').css({
+        height: height
+    })
+}
+$(window).on('resize', function() {
+    fixPagesHeight()
 })
+fixPagesHeight()
 var yl = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 window.onload = function() {
     $("#now3").attr("id", "d1");
@@ -298,6 +310,7 @@ window.onload = function() {
     });
     mySwiper.unlockSwipes();
 };
+
 function jump(yyyy, mm, dd) {
     sev_y = parseInt(yyyy);
     sev_m = parseInt(mm);
@@ -399,10 +412,10 @@ function get_first(a, b, c, d, e) {
     for (var i = a; i > 0; i--) {
         var bday = ldays - i + 1;
         // var ly = LunarDate.GetLunarDayDetail(lb, lm, bday);
-       /* var jq = getjq(lb, lm, bday);
-        if (jq) {
-            ly = '<font color="#00b7ec">' + jq;
-        }*/
+        /* var jq = getjq(lb, lm, bday);
+         if (jq) {
+             ly = '<font color="#00b7ec">' + jq;
+         }*/
         var jd = "";
         var hb = lb + "-" + lm + "-" + bday;
 
