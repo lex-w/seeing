@@ -3,12 +3,14 @@ var catetorySwiper = new Swiper(".category-box", {
     initialSlide: 0,
     loop: false,
     speed: 400,
+    freeMode:true,
+    noSwiping : true,
+    freeModeFluid:true,
+    calculateHeight : true,
+    visibilityFullFit: true,
     onSlideChangeStart: function(){
         $(".category-type .selected").removeClass('selected');
         $(".category-type a").eq(catetorySwiper.activeIndex).addClass('selected');
-        //console.log(catetorySwiper.activeIndex)
-        // $(".category-box .swiper-slide").hide().eq(catetorySwiper.activeIndex).show();
-        //$(".category-box .swiper-slide").css('opacity', 0).eq(catetorySwiper.activeIndex).css('opacity', '1');
     },
     onSlideChangeEnd: function(swiper){
     }
